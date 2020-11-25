@@ -1,0 +1,43 @@
+---
+- name: Deploy the tracker to the instance
+  hosts: centos
+  become: yes
+  tasks:
+    - name: create usage directory inside /opt
+      file:
+        path: /opt/usage
+        state: directory
+        owner: root
+        mode: "777"
+        recurse: yes
+    - name: create CPU.csv file inside /opt/usage
+      file:
+        path: /opt/usage/CPU.csv
+        mode: "777"
+        state: touch
+    - name: create MEM.csv file inside /opt/usage
+      file:
+        path: /opt/usage/MEM.csv
+        mode: "777"
+        state: touch
+    - name: create DISK.csv file inside /opt/usage
+      file:
+        path: /opt/usage/DISK.csv
+        mode: "777"
+        state: touch
+    - name: Deploy script file
+      copy:
+        src: ./machineHealth.sh
+        dest: /home/centos/machineHealth.sh
+        mode: a+x
+    - name: Create a crone job to analysis the system each 15 minutes
+      cron:
+        name: "run tracker"
+        minute: "15"
+        job: "/home/centos/machineHealth.sh"
+    - name: Install some linux packages passed as a parameter
+      yum:
+        name:
+          - nano
+          - mysql
+        state: present
