@@ -1,6 +1,6 @@
-# Device Health Tracker
+# Centos Health Tracker
 
-Device Health Tracker is a shell script to keep track of CPU, memory usage and the available space on the disk. The script saves the device usage on three separates `csv` files. The tracker is updated every `15 minutes`. This project is designed for a centOS machine, We used ec2 AMI `CentOS 7(x86_64)-with Updates HVM`.
+Centos Health Tracker is a shell script to keep track of CPU, memory usage and the available space on the disk. The script saves the device usage on three separates `csv` files. The tracker is updated every `15 minutes`. This project is designed for a centOS machine, We used ec2 AMI `CentOS 7(x86_64)-with Updates HVM`.
 To make fast and efficient deployment I used Ansible playbook to perform the following tasks:
 
 - Deploy the shell script.
